@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
     CreateRequestContainer ,
     CreateRequestHeader,
@@ -8,7 +8,9 @@ import {
     CreateRequestLabel,
     CreateRequestInputGroup,
     CreateRequestNameInput,
-    CreateRequestMethodSelect
+    CreateRequestActionContainer,
+    CreateRequestInfoAction,
+    CreateRequestActionButton
 } from './styles'
 
 interface CreateRequestPopupProps{
@@ -31,6 +33,11 @@ const methods = [
 
 export default function CreateRequestPopup(props : CreateRequestPopupProps){
     
+    const handleSubmit = useCallback((event) => {
+        event.preventDefault();
+        console.log(event)
+    },[])
+
     return(
         <CreateRequestContainer ref={props.reference} >
             <CreateRequestHeader>
@@ -39,26 +46,30 @@ export default function CreateRequestPopup(props : CreateRequestPopupProps){
                     <CreateRequestHeaderIcon className="fas fa-times" />
                 </CreateRequestHeaderButton>
             </CreateRequestHeader>
-            <CreateRequestForm>
+            <CreateRequestForm onSubmit={handleSubmit}>
                 <CreateRequestLabel>Name
                     <span>(defaults to your request URL if left empty)</span>
                 </CreateRequestLabel>
                 <CreateRequestInputGroup>
                     <CreateRequestNameInput type="text" name="request" placeholder="My Request" />
-                    <CreateRequestMethodSelect>
+                    <select>
                         {
                             methods.map((method,index) => {
                                 return index === 0 ? (
-                                    <option  style={{color:method.color}} key={method.name} value={method.name} selected>{method.name}</option>
+                                    <option  style={{color:method.color}} key={method.name} defaultValue={method.name}>{method.name}</option>
                                 ) : (
                                     <option style={{color:method.color}} key={method.name} value={method.name}>{method.name}</option>
                                 )
                             })
                         }    
-                    </CreateRequestMethodSelect>
+                    </select>
                 </CreateRequestInputGroup>
-                
+                <CreateRequestActionContainer>
+                    <CreateRequestInfoAction>* Tip:paste Curl command into URL afterwards to import it</CreateRequestInfoAction>
+                    <CreateRequestActionButton type="submit">Create</CreateRequestActionButton>
+                </CreateRequestActionContainer>
             </CreateRequestForm>
+
         </CreateRequestContainer>
     )
 }

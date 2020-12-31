@@ -21,7 +21,7 @@ export const CreateRequestHeader = styled('div')`
     height:40px;
     justify-content:space-between;
     align-items:center;
-    padding:10px;
+    padding:20px;
     border-bottom:.1px dashed #aaaa;
 `;
 
@@ -35,8 +35,8 @@ export const CreateRequestHeaderIcon = styled('i')`
 `;
 
 export const CreateRequestForm = styled('form')`
-    border-bottom:.1px dashed #aaaa;
-    margin: 15px 0;
+    padding: 22px 0;
+    margin-bottom:22px;
 `;
 export const CreateRequestLabel = styled('label')`
     font-size:13px;
@@ -56,6 +56,34 @@ export const CreateRequestInputGroup = styled('div')`
 `;
 export const CreateRequestNameInput = styled('input')`
     border: .5px solid #aaa1;
-    padding:10px
+    padding:10px;
 `;
-export const CreateRequestMethodSelect = styled('select')``;
+
+export const CreateRequestActionContainer = styled('div')`
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    height:68px;
+    padding-top:20px;
+    border-top:.1px dashed #aaaa;
+`;
+
+export const CreateRequestInfoAction = styled('span')`
+    font-style:italic;
+    font-size:10px;
+    margin-left:10px;
+`;
+
+export const CreateRequestActionButton = styled('button')`
+    background:transparent;
+    height:100%;
+    max-width:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    border-radius:0 0 8px 0;
+    &:hover {
+        background:#aaa
+    }
+`;
