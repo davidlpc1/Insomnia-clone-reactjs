@@ -1,39 +1,25 @@
-import React, { useCallback } from 'react';
+import React, { useRef } from 'react';
 import {
   AppGrid,
-  MethodsTypesContainer,
   BodyContainer,
   ResultContainer,
-  InsomniaConfig,
-  SearchAndCreateMethodContainer,
-  SearchMethod,
-  ButtonCreateRequest,
-  IconCreateRequest
 } from './styles'
 
-const MethodsTypes = () => {
-  const showPopupToCreateNewRequest = useCallback(() => {
+import MethodsTypes from '../../components/MethodsTypes/'
+import CreateRequestPopup from '../../components/CreateRequestPopup'
 
-  },[])
-  return (
-    <MethodsTypesContainer>
-      <InsomniaConfig><h2>Insomnia</h2></InsomniaConfig>
-      <SearchAndCreateMethodContainer>
-        <SearchMethod type="text" placeholder="Filter" />
-        <ButtonCreateRequest onClick={showPopupToCreateNewRequest}>
-          <IconCreateRequest className="fas fa-plus-circle" />
-        </ButtonCreateRequest>
-      </SearchAndCreateMethodContainer>
-    </MethodsTypesContainer>
-  )
-}
- 
 export default function App(){
+  const appGridRef = useRef<HTMLDivElement>(null);
+  const createRequestPopupRef = useRef<HTMLDivElement>(null);
+
   return (
-    <AppGrid>
-      <MethodsTypes />
-      <BodyContainer></BodyContainer>
-      <ResultContainer></ResultContainer>
-    </AppGrid>
+    <>
+      <CreateRequestPopup reference={createRequestPopupRef} />
+      <AppGrid ref={appGridRef}>
+        <MethodsTypes reference={createRequestPopupRef} />
+        <BodyContainer></BodyContainer>
+        <ResultContainer></ResultContainer>
+      </AppGrid>
+    </>
   );
 }
