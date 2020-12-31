@@ -13,6 +13,7 @@ export const CreateRequestContainer = styled('div')`
     border-radius:8px;
     z-index:9999;
     display:none;
+    transition:200ms ease-in-out;
 `;
 
 export const CreateRequestHeader = styled('div')`
@@ -33,3 +34,28 @@ export const CreateRequestHeaderIcon = styled('i')`
     pointer-events:none;
 `;
 
+export const CreateRequestForm = styled('form')`
+    border-bottom:.1px dashed #aaaa;
+    margin: 15px 0;
+`;
+export const CreateRequestLabel = styled('label')`
+    font-size:13px;
+    color:var(--black-color);
+    margin-left:10px;
+    margin-top:10px;
+    span{
+        color:#aaa;
+        font-style:italic;
+    }
+`;
+export const CreateRequestInputGroup = styled('div')`
+    display:flex;
+    padding:5px 10px;
+    justify-content:space-between;
+    align-items:center;
+`;
+export const CreateRequestNameInput = styled('input')`
+    border: .5px solid #aaa1;
+    padding:10px
+`;
+export const CreateRequestMethodSelect = styled('select')``;

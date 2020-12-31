@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   AppGrid,
   BodyContainer,
@@ -14,9 +14,9 @@ export default function App(){
 
   return (
     <>
-      <CreateRequestPopup reference={createRequestPopupRef} />
+      <CreateRequestPopup appRef={appGridRef} reference={createRequestPopupRef} />
       <AppGrid ref={appGridRef}>
-        <MethodsTypes reference={createRequestPopupRef} />
+        <MethodsTypes appRef={appGridRef} reference={createRequestPopupRef} />
         <BodyContainer></BodyContainer>
         <ResultContainer></ResultContainer>
       </AppGrid>
