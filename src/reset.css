@@ -4,8 +4,16 @@
   box-sizing: border-box;
   outline:0;
   border:0;
+  font-family: 'Inter', sans-serif;
 }
 
 body,html{
   height:100vh;
+}
+
+:root{
+  --primary-color:#292a25;
+  --insomnia-color:#6700d8;
+  --white-color:#fff;
+  --black-color:#000;
 }
