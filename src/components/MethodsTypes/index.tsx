@@ -27,7 +27,7 @@ export default function MethodsTypes(props : MethodsTypesProps){
 
     useEffect(() => {
         setRequestsAlreadyExists(JSON.parse(localStorage.getItem('insomnia_davidlpc1--requests') || '[]') as RequestsAlreadyExists)
-    },[ JSON.parse(localStorage.getItem('insomnia_davidlpc1--requests') || '[]')])
+    },[ JSON.parse(localStorage.getItem('insomnia_davidlpc1--requests') || '[]') ])
 
     return (
         <MethodsTypesContainer>
@@ -39,12 +39,17 @@ export default function MethodsTypes(props : MethodsTypesProps){
             </ButtonCreateRequest>
             </SearchAndCreateMethodContainer>
             { 
-                requestsAlreadyExists.map(request => (
-                    <ExistRequestContainer key={request.nameOfRequest}>
-                        {request.nameOfRequest}
-                        {request.methodOfRequest}
-                    </ExistRequestContainer>
-                ))
+                requestsAlreadyExists.map(request => {
+                    const method = methods.filter(method => method.name.toUpperCase() === request.methodOfRequest.toUpperCase())
+                    const color = method.length > 0 ? method[0].color : '#fff';
+
+                    return(
+                        <ExistRequestContainer key={request.nameOfRequest}>
+                            <p>{request.nameOfRequest}</p>
+                            <p style={{color}}>{request.methodOfRequest}</p>
+                        </ExistRequestContainer>
+                    );
+                })
             }
         </MethodsTypesContainer>
     )

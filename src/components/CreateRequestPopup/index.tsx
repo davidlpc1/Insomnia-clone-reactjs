@@ -28,7 +28,7 @@ type RequestsAlreadyExists = Array<{ nameOfRequest:string, methodOfRequest:strin
 
 export default function CreateRequestPopup(props : CreateRequestPopupProps){
     const [ nameOfRequest ,setNameOfRequest ] = useState('My Request');
-    const [ methodOfRequest ,setMethodOfRequest ] = useState('GET');
+    const [ methodOfRequest ,setMethodOfRequest ] = useState('Get');
 
     const handleSubmit = useCallback((event) => {
         event.preventDefault();
