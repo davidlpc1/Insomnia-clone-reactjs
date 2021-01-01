@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
     CreateRequestContainer ,
     CreateRequestHeader,
@@ -31,11 +31,30 @@ const methods = [
     { name: 'Delete',color:'#de5243' },
 ]
 
+type RequestsAlreadyExists = Array<{ nameOfRequest:string, methodOfRequest:string }>;
+
 export default function CreateRequestPopup(props : CreateRequestPopupProps){
-    
+    const [ nameOfRequest ,setNameOfRequest ] = useState('My Request');
+    const [ methodOfRequest ,setMethodOfRequest ] = useState('GET');
+
     const handleSubmit = useCallback((event) => {
         event.preventDefault();
-        console.log(event)
+        
+        const requestsAlreadyExists = JSON.parse(localStorage.getItem('insomnia_davidlpc1--requests') || '[]');
+        localStorage.setItem('insomnia_davidlpc1--requests',JSON.stringify([
+            ...requestsAlreadyExists as RequestsAlreadyExists,
+            { nameOfRequest, methodOfRequest }
+        ]))
+
+        hidePopup(props.reference,props.appRef)
+    },[ nameOfRequest, methodOfRequest,props.reference,props.appRef])
+
+    const handleNameChange = useCallback((event) => {
+        setNameOfRequest(event.target.value)
+    },[])
+
+    const handleMethodChange = useCallback((event) => {
+        setMethodOfRequest(event.target.value)
     },[])
 
     return(
@@ -51,8 +70,8 @@ export default function CreateRequestPopup(props : CreateRequestPopupProps){
                     <span>(defaults to your request URL if left empty)</span>
                 </CreateRequestLabel>
                 <CreateRequestInputGroup>
-                    <CreateRequestNameInput type="text" name="request" placeholder="My Request" />
-                    <select>
+                    <CreateRequestNameInput value={nameOfRequest} onChange={handleNameChange} type="text" name="request" placeholder="My Request" />
+                    <select value={methodOfRequest} onChange={handleMethodChange}>
                         {
                             methods.map((method,index) => {
                                 return index === 0 ? (

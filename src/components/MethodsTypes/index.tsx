@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect, useState } from 'react';
 import {
     MethodsTypesContainer,
     InsomniaConfig,
@@ -20,6 +20,13 @@ function showPopup(refOfPopup:React.RefObject<HTMLDivElement>,refOfApp:React.Ref
 }
 
 export default function MethodsTypes(props : MethodsTypesProps){
+    const [requestsAlreadyExists,setRequestsAlreadyExists] = useState([])
+
+    useEffect(() => {
+        setRequestsAlreadyExists(JSON.parse(localStorage.getItem('insomnia_davidlpc1--requests') || '[]'))
+    },[ localStorage.getItem('insomnia_davidlpc1--requests') ])
+
+
     return (
         <MethodsTypesContainer>
             <InsomniaConfig><h2>Insomnia</h2></InsomniaConfig>
@@ -29,6 +36,9 @@ export default function MethodsTypes(props : MethodsTypesProps){
                 <IconCreateRequest className="fas fa-plus-circle" />
             </ButtonCreateRequest>
             </SearchAndCreateMethodContainer>
+            { 
+                JSON.stringify(requestsAlreadyExists)
+            }
         </MethodsTypesContainer>
     )
 }
