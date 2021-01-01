@@ -12,7 +12,7 @@ import {
     CreateRequestInfoAction,
     CreateRequestActionButton
 } from './styles'
-
+import { methods } from '../../methods';
 interface CreateRequestPopupProps{
     reference:React.RefObject<HTMLDivElement>,
     appRef:React.RefObject<HTMLDivElement>
@@ -23,13 +23,6 @@ function hidePopup(refOfPopup:React.RefObject<HTMLDivElement>,refOfApp:React.Ref
     refOfPopup.current.style.display = 'none';
     refOfApp.current.style.opacity = '1';
 }
-
-const methods = [
-    { name: 'Get', color:'#9583de' },
-    { name: 'Post',color:'#74aa3a' },
-    { name: 'Put',color:'#e69123' },
-    { name: 'Delete',color:'#de5243' },
-]
 
 type RequestsAlreadyExists = Array<{ nameOfRequest:string, methodOfRequest:string }>;
 

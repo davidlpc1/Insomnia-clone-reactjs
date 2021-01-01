@@ -42,3 +42,13 @@ export const IconCreateRequest = styled('i')`
     color:#fff;
     pointer-events:none;
 `;
+
+export const ExistRequestContainer = styled('div')`
+    display:flex;
+    padding:10px;
+    gap:10px;
+    color:var(--white-color);
+    justify-content:space-between;
+    align-items:center;
+    background:transparent;
+`;
