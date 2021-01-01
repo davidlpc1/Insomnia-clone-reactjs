@@ -5,9 +5,10 @@ import {
     SearchAndCreateMethodContainer,
     SearchMethod,
     ButtonCreateRequest,
-    IconCreateRequest
+    IconCreateRequest,
+    ExistRequestContainer
 } from './styles';
-
+import { methods } from '../../methods';
 interface MethodsTypesProps{
     reference:React.RefObject<HTMLDivElement>,
     appRef:React.RefObject<HTMLDivElement>
@@ -19,13 +20,14 @@ function showPopup(refOfPopup:React.RefObject<HTMLDivElement>,refOfApp:React.Ref
     refOfApp.current.style.opacity = '0.8';
 }
 
+type RequestsAlreadyExists = Array<{ nameOfRequest:string, methodOfRequest:string }>;
+
 export default function MethodsTypes(props : MethodsTypesProps){
-    const [requestsAlreadyExists,setRequestsAlreadyExists] = useState([])
+    const [requestsAlreadyExists,setRequestsAlreadyExists] = useState([{nameOfRequest:'',methodOfRequest:''}] as RequestsAlreadyExists)
 
     useEffect(() => {
-        setRequestsAlreadyExists(JSON.parse(localStorage.getItem('insomnia_davidlpc1--requests') || '[]'))
-    },[ localStorage.getItem('insomnia_davidlpc1--requests') ])
-
+        setRequestsAlreadyExists(JSON.parse(localStorage.getItem('insomnia_davidlpc1--requests') || '[]') as RequestsAlreadyExists)
+    },[ JSON.parse(localStorage.getItem('insomnia_davidlpc1--requests') || '[]')])
 
     return (
         <MethodsTypesContainer>
@@ -37,7 +39,12 @@ export default function MethodsTypes(props : MethodsTypesProps){
             </ButtonCreateRequest>
             </SearchAndCreateMethodContainer>
             { 
-                JSON.stringify(requestsAlreadyExists)
+                requestsAlreadyExists.map(request => (
+                    <ExistRequestContainer key={request.nameOfRequest}>
+                        {request.nameOfRequest}
+                        {request.methodOfRequest}
+                    </ExistRequestContainer>
+                ))
             }
         </MethodsTypesContainer>
     )
