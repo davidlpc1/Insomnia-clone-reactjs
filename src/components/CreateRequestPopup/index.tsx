@@ -13,6 +13,7 @@ import {
     CreateRequestActionButton
 } from './styles'
 import { methods } from '../../methods';
+import { useHistory } from 'react-router-dom';
 interface CreateRequestPopupProps{
     reference:React.RefObject<HTMLDivElement>,
     appRef:React.RefObject<HTMLDivElement>
@@ -29,6 +30,7 @@ type RequestsAlreadyExists = Array<{ nameOfRequest:string, methodOfRequest:strin
 export default function CreateRequestPopup(props : CreateRequestPopupProps){
     const [ nameOfRequest ,setNameOfRequest ] = useState('My Request');
     const [ methodOfRequest ,setMethodOfRequest ] = useState('Get');
+    const history = useHistory()
 
     const handleSubmit = useCallback((event) => {
         event.preventDefault();
@@ -40,7 +42,8 @@ export default function CreateRequestPopup(props : CreateRequestPopupProps){
         ]))
 
         hidePopup(props.reference,props.appRef)
-    },[ nameOfRequest, methodOfRequest,props.reference,props.appRef])
+        history.push('/')
+    },[ nameOfRequest, methodOfRequest,props.reference,props.appRef, history])
 
     const handleNameChange = useCallback((event) => {
         setNameOfRequest(event.target.value)
