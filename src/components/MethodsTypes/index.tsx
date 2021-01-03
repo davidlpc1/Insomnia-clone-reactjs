@@ -9,6 +9,7 @@ import {
     ExistRequestContainer
 } from './styles';
 import { methods } from '../../methods';
+import { Link } from 'react-router-dom';
 interface MethodsTypesProps{
     reference:React.RefObject<HTMLDivElement>,
     appRef:React.RefObject<HTMLDivElement>
@@ -58,10 +59,13 @@ export default function MethodsTypes(props : MethodsTypesProps){
                     const color = method.length > 0 ? method[0].color : '#fff';
 
                     return(
-                        <ExistRequestContainer key={request.nameOfRequest}>
-                            <p>{request.nameOfRequest}</p>
-                            <p style={{color}}>{request.methodOfRequest}</p>
-                        </ExistRequestContainer>
+                        <Link style={{textDecoration: 'none'}} key={request.nameOfRequest} to={`/${request.nameOfRequest}`}>
+                            <ExistRequestContainer>
+                                <p>{request.nameOfRequest}</p>
+                                <p style={{color}}>{request.methodOfRequest}</p>
+                            </ExistRequestContainer>
+                        </Link>
+
                     );
                 })
             }

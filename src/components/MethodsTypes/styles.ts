@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const MethodsTypesContainer = styled('div')`
   background-color:var(--primary-color);
   height:100vh;
+  border:.2px solid #3e3f3a;
 `;
 
 export const InsomniaConfig = styled('div')`
@@ -51,4 +52,5 @@ export const ExistRequestContainer = styled('div')`
     justify-content:space-between;
     align-items:center;
     background:transparent;
+    cursor:pointer;
 `;
