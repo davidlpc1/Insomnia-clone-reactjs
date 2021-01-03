@@ -1,4 +1,4 @@
-import React,{ useCallback, useEffect, useState } from 'react';
+import React,{ ChangeEvent , useState } from 'react';
 import {
     MethodsTypesContainer,
     InsomniaConfig,
@@ -22,8 +22,10 @@ function showPopup(refOfPopup:React.RefObject<HTMLDivElement>,refOfApp:React.Ref
 
 type RequestsAlreadyExists = Array<{ nameOfRequest:string, methodOfRequest:string }>;
 
-function filterRequests(requestsAlreadyExists: RequestsAlreadyExists){
-    const filteredArray = requestsAlreadyExists.filter(() => {}); 
+function filterRequests(requestsAlreadyExists: RequestsAlreadyExists,searchedRequest:string){
+    const filteredArray = requestsAlreadyExists.filter(
+        request => request.nameOfRequest.toLowerCase().indexOf(searchedRequest.toLowerCase()) > -1
+    )
     return filteredArray;
 }
 
@@ -32,14 +34,14 @@ export default function MethodsTypes(props : MethodsTypesProps){
     const [ filteredRequests , setFilteredRequests ] = useState(requestsAlreadyExists);
     const [ searchedRequest, setSearchedRequest ] = useState('')
 
-    const handleSearchedRequest = useCallback(event => {
-        setSearchedRequest(event.target.value)
-        // setFilteredRequests(filterRequests(requestsAlreadyExists));
-    },[ requestsAlreadyExists,searchedRequest ])
+    function handleSearchedRequest(event:ChangeEvent<HTMLInputElement>){
+        setSearchedRequest(event.target.value);
+        setFilteredRequests(filterRequests(requestsAlreadyExists,searchedRequest))
+    }
 
-    useEffect(() => {
-        setFilteredRequests(requestsAlreadyExists)
-    },[ requestsAlreadyExists ]);
+    // useEffect(() => {
+    //     setFilteredRequests(requestsAlreadyExists)
+    // },[ requestsAlreadyExists ]);
 
     return (
         <MethodsTypesContainer>
