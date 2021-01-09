@@ -25,7 +25,7 @@ type RequestsAlreadyExists = Array<{ nameOfRequest:string, methodOfRequest:strin
 
 function filterRequests(requestsAlreadyExists: RequestsAlreadyExists,searchedRequest:string){
     const filteredArray = requestsAlreadyExists.filter(
-        request => request.nameOfRequest.toLowerCase().indexOf(searchedRequest.toLowerCase()) > -1
+        request => request.nameOfRequest.toLowerCase().trim().indexOf(searchedRequest.toLowerCase().trim()) > -1
     )
     return filteredArray;
 }

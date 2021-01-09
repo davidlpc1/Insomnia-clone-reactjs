@@ -38,7 +38,7 @@ export default function CreateRequestPopup(props : CreateRequestPopupProps){
         const requestsAlreadyExists = JSON.parse(localStorage.getItem('insomnia_davidlpc1--requests') || '[]');
         localStorage.setItem('insomnia_davidlpc1--requests',JSON.stringify([
             ...requestsAlreadyExists as RequestsAlreadyExists,
-            { nameOfRequest, methodOfRequest }
+            { nameOfRequest, methodOfRequest,urlOfRequest:'' }
         ]))
 
         hidePopup(props.reference,props.appRef)
